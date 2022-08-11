@@ -1,0 +1,47 @@
+* D:\Technical\LTSpice\ASK_FSK_mix\ASK.asc
+V1 VPULSE1 0 PULSE(-5 5 0 0.01m 0.01m 1m 2m)
+V2 VSIN1 0 SINE(0 5 1k 0) AC 1
+D1 0 VSIN1_clamped D
+C1 VSIN1_clamped VSIN1 100000µ
+Q3 VSIN1 N005 N003 0 2N2222
+R7 N005 VPULSE1 50
+R5 N003 0 1k
+D2 N003 N004 MUR460
+R6 0 N004 10k
+C2 N004 0 1µ
+V4 P001 0 -12
+V5 P002 0 12
+V6 N001 0 1
+R4 N002 0 1k
+XU2 N004 N001 P002 P001 N002 UA741
+R11 0 N006 1k
+R12 N013 VPULSE1 50
+Q5 VSIN2 N013 N006 0 2N2907
+R1 N006 0 1k
+V7 VSIN2 0 SINE(0 5 10k 0) AC 1
+D3 0 VSIN2_clamped D
+C3 VSIN2_clamped VSIN2 100000µ
+C4 N008 N006 1n
+R2 N008 0 10k
+V8 -vee 0 -12
+V9 +vcc 0 12
+V10 N009 0 1
+R3 N012 0 1k
+XU1 N011 N009 +vcc -vee N010 UA741
+D4 N007 N011 MUR460
+R8 0 N011 500
+C5 N011 0 1µ
+XU3 N008 N007 +vcc -vee N007 UA741
+XU4 0 N010 +vcc -vee N012 UA741
+XU5 N003 N006 +vcc -vee N006 UA741
+.model D D
+.lib C:\Users\yuann\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NPN NPN
+.model PNP PNP
+.lib C:\Users\yuann\Documents\LTspiceXVII\lib\cmp\standard.bjt
+.tran 0 6m 0m
+.include C:\Users\yuann\Downloads\sloj138\UA741.301
+* ASK part of the circuit
+* FSK part of the circuit
+.backanno
+.end
